@@ -2,7 +2,7 @@ import { FunctionComponent, MouseEvent } from "react";
 import styles from "./styles.module.css";
 
 interface ButtonProps {
-  symbol: String | number;
+  symbol: string | number;
   onClick?: (event: MouseEvent<HTMLDivElement>) => void;
   isSpan?: boolean;
   isBlue?: boolean;
