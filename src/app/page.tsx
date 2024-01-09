@@ -15,12 +15,31 @@ export default function Calculator() {
     setCurrentView(0);
   }
 
-  useEffect(()=>{console.log('the symbol is:', symbol)},[symbol])
+  function deleteNumber(): void {
+    setCurrentView((current) => {
+      const currentAsString = current.toString();
+
+      if (currentAsString.length > 1) {
+        const newNumber =
+          current < 0
+            ? -1 * Math.floor(Math.abs(current) / 10)
+            : Math.floor(current / 10);
+        return newNumber;
+      } else {
+        return 0;
+      }
+    });
+  }
+
+  useEffect(() => {
+    console.log("the symbol is:", symbol);
+  }, [symbol]);
+
   return (
     <div className="calculator grid grid-cols-4 grid-flow-row  gap-1 p-1">
       <Display currentView={currentView} historyView={currentHistory}></Display>
       <Button symbol="CE" isSpan={true} isGray={true} onClick={() => clear()} />
-      <Button symbol="⇤" isGray={true} />
+      <Button symbol="⇤" isGray={true} onClick={() => deleteNumber()} />
       <Button symbol="/" isGray={true} onClick={() => setSymbol("/")} />
       <Button
         symbol={7}
