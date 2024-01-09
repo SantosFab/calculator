@@ -4,23 +4,21 @@ import Button from "./compoments/button/Button";
 import Display from "./compoments/display/Display";
 
 export default function Calculator() {
-  const [currentView, setCurrentView] = useState<string>("0");
+  const [currentView, setCurrentView] = useState<number>(-124);
   const [symbol, setSymbol] = useState<string | undefined>(undefined);
   const [currentHistory, setCurrentHistory] = useState<number | undefined>(
     undefined
   );
+
   function clear(): void {
     setCurrentHistory(undefined);
-    setCurrentView("0");
+    setCurrentView(0);
   }
 
   useEffect(()=>{console.log('the symbol is:', symbol)},[symbol])
   return (
     <div className="calculator grid grid-cols-4 grid-flow-row  gap-1 p-1">
-      <Display
-        currentView={parseInt(currentView)}
-        historyView={currentHistory}
-      ></Display>
+      <Display currentView={currentView} historyView={currentHistory}></Display>
       <Button symbol="CE" isSpan={true} isGray={true} onClick={() => clear()} />
       <Button symbol="⇤" isGray={true} />
       <Button symbol="/" isGray={true} onClick={() => setSymbol("/")} />
