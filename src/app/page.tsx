@@ -4,7 +4,7 @@ import Button from "./compoments/button/Button";
 import Display from "./compoments/display/Display";
 
 export default function Calculator() {
-  const [currentView, setCurrentView] = useState<string>('0');
+  const [currentView, setCurrentView] = useState<string>("0");
   const [symbol, setSymbol] = useState<string | undefined>(undefined);
   const [currentHistory, setCurrentHistory] = useState<string | undefined>(
     undefined
@@ -12,45 +12,44 @@ export default function Calculator() {
 
   function clear(): void {
     setCurrentHistory(undefined);
-    setCurrentView('0');
+    setCurrentView("0");
   }
 
   function deleteNumber(): void {
     setCurrentView((current) => {
-      
-
       if (current.length > 1) {
-        
         return current.slice(0, -1);
       } else {
-        return '0';
+        return "0";
       }
     });
   }
 
   function addNumberOnCurrentView(number: number): void {
+    const SNumber: string = number.toString();
     setCurrentView((current) => {
       if (current.length >= 15) {
         return current;
+      } else if (current === "0") {
+        return SNumber;
+      } else {
+        return current + SNumber;
       }
-      return (parseFloat(current) * 10 + number).toString();
     });
   }
 
   function addOperation(symbol: string): void {
     setSymbol(symbol);
     setCurrentHistory(currentView + symbol);
-    setCurrentView('0');
+    setCurrentView("0");
   }
 
   function addFraction(): void {
-   
+    if (currentView.indexOf(".") === -1) {
+      setCurrentView((current) => currentView + ".");
+    }
+    return;
   }
-  
-
-  useEffect(() => {
-    console.log("the symbol is:", symbol);
-  }, [symbol]);
 
   return (
     <div className="calculator grid grid-cols-4 grid-flow-row  gap-1 p-1">
