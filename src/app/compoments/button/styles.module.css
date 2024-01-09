@@ -1,0 +1,23 @@
+.button {
+  background-color: var(--color-gray-1);
+  border-radius: 5px;
+}
+
+.button:hover {
+  background-color: var(--color-gray-2);
+}
+
+.gray {
+  background-color: var(--color-gray-2);
+}
+
+.gray:hover {
+  background-color: var(--color-gray-1);
+}
+.blue {
+  background-color: var(--color-blue-light);
+}
+
+.blue:hover {
+  background-color: var(--color-blue);
+}
