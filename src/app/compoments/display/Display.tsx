@@ -3,7 +3,7 @@ import styles from "./styles.module.css";
 
 interface DisplayProps {
   historyView?: string;
-  currentView: number;
+  currentView: string;
 }
 
 const Display: FunctionComponent<DisplayProps> = ({
