@@ -1,8 +1,20 @@
-import { MouseEvent } from "react";
+"use client";
+import { MouseEvent, useState, useEffect } from "react";
 import Button from "./compoments/button/Button";
 import Display from "./compoments/display/Display";
 
 export default function Calculator() {
+  const [currentView, setCurrentView] = useState<string>("0");
+  const [symbol, setSymbol] = useState<string | undefined>(undefined);
+  const [currentHistory, setCurrentHistory] = useState<number | undefined>(
+    undefined
+  );
+  function clear(): void {
+    setCurrentHistory(undefined);
+    setCurrentView("0");
+  }
+
+  useEffect(()=>{console.log('O simbolo click foi:', symbol)},[symbol])
   return (
     <div className="calculator grid grid-cols-4 grid-flow-row  gap-1 p-1">
       <Display currentView={0}></Display>
