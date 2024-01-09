@@ -2,7 +2,7 @@ import { FunctionComponent } from "react";
 import styles from "./styles.module.css";
 
 interface DisplayProps {
-  historyView?: number;
+  historyView?: string;
   currentView: number;
 }
 

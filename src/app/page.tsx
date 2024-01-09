@@ -1,12 +1,12 @@
 "use client";
-import { MouseEvent, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Button from "./compoments/button/Button";
 import Display from "./compoments/display/Display";
 
 export default function Calculator() {
   const [currentView, setCurrentView] = useState<number>(-12);
   const [symbol, setSymbol] = useState<string | undefined>(undefined);
-  const [currentHistory, setCurrentHistory] = useState<number | undefined>(
+  const [currentHistory, setCurrentHistory] = useState<string | undefined>(
     undefined
   );
 
