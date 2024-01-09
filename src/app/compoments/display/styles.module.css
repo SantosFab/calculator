@@ -1,8 +1,8 @@
 .view {
-  font-size: 1.5em;
+  font-size: 1.7em;
   font-weight: 400;
   max-width: 288px;
-  
+  min-height: 24px;
 }
 
 .history {
