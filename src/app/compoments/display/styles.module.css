@@ -1,8 +1,11 @@
-/* div {
-  font-size: 0.4em;
+.view {
+  font-size: 1.5em;
   font-weight: 400;
-  height: 21px;
-} */
+  max-width: 288px;
+  
+}
+
 .history {
-  color: var(--gray-1);
+  color: var(--color-gray-2);
+  font-size: 1em;
 }

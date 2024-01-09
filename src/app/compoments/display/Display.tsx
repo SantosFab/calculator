@@ -11,10 +11,10 @@ const Display: FunctionComponent<DisplayProps> = ({
   currentView,
 }) => {
   return (
-    <>
-      <div className={`${styles.history} overflow-hidden col-span-3 row-span-2`}>{historyView}</div>
-      <div className="overflow-hidden">{currentView}</div>
-    </>
+    <div className="col-span-4 row-span-2 flex flex-col justify-center items-end px-2 overflow-hidden ">
+      <div className={`${styles.history} ${styles.view} `}>{historyView}</div>
+      <div className={`${styles.view} `}>{currentView}</div>
+    </div>
   );
 };
 
