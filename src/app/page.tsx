@@ -8,6 +8,7 @@ import {
 } from "@/utils/interface/interfaceTypeOfOperator";
 
 import { handlerNumberOnCurrentView } from "@/app/methods/add/handlerNumberOnCurrentiView";
+import { handlerDeleteNumber } from "@/app/methods/delete/handlerDeleteNumber";
 
 export default function Calculator() {
   const [currentView, setCurrentView] = useState<string>("0");
@@ -39,15 +40,7 @@ export default function Calculator() {
   const Add = (numberS: string) =>
     handlerNumberOnCurrentView({ numberS, setCurrentView });
 
-  function handlerDeleteNumber(): void {
-    setCurrentView((current) => {
-      if (current.length > 1) {
-        return current.slice(0, -1);
-      } else {
-        return "0";
-      }
-    });
-  }
+  const Delete = () => handlerDeleteNumber({ setCurrentView });
 
   function handlerNumberOnCurrentView(numberS: string): void {
     setCurrentView((current) => {
@@ -206,46 +199,11 @@ export default function Calculator() {
     <div className="calculator grid grid-cols-4 grid-flow-row  gap-1 p-1">
       <Display currentView={currentView} historyView={currentHistory}></Display>
       <Button symbol="CE" isSpan={true} isGray={true} onClick={() => Clear()} />
-      <Button symbol="⇤" isGray={true} onClick={() => handlerDeleteNumber()} />
-      <Button
-        symbol="/"
-        isGray={true}
-        onClick={() => handlerOperator(operators[3])}
-      />
-      <Button symbol={7} onClick={() => Add('7')} />
-      <Button symbol={8} onClick={() => Add('8')} />
-      <Button symbol={9} onClick={() => Add('9')} />
-      <Button
-        symbol="*"
-        isGray={true}
-        onClick={() => handlerOperator(operators[2])}
-      />
-      <Button symbol={4} onClick={() => Add('4')} />
-      <Button symbol={5} onClick={() => Add('5')} />
-      <Button symbol={6} onClick={() => Add('6')} />
-      <Button
-        symbol="-"
-        isGray={true}
-        onClick={() => handlerOperator(operators[1])}
-      />
-      <Button symbol={1} onClick={() => Add('1')} />
-      <Button symbol={2} onClick={() => Add('2')} />
-      <Button symbol={3} onClick={() => Add('3')} />
-      <Button
-        symbol="+"
-        isGray={true}
-        onClick={() => handlerOperator(operators[0])}
-      />
-      <Button
-        symbol={0}
-        isSpan={true}
-        onClick={() => handlerNumberOnCurrentView('0')}
-      />
-      <Button symbol="." onClick={() => handlerFraction()} />
+      <Button symbol="⇤" isGray={true} onClick={() => Delete()} />
       <Button
         symbol="="
         isBlue={true}
-        onClick={() => handlerResultOfTheOperation({ isEqualButton: true })}
+        onClick={() => Result({ isEqualButton: true })}
       />
     </div>
   );
