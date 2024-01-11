@@ -18,10 +18,15 @@ export default function Calculator() {
   const [resultOperation, setResultOperation] = useState<number | undefined>(
     undefined
   );
-
-  interface TypeOfOperator {
-    operator: "/" | "*" | "-" | "+";
-  }
+  
+  const Clear = () =>
+    handlerClear({
+      setCurrentHistory,
+      setCurrentView,
+      setSymbol,
+      setFirstTerm,
+      setResultOperation,
+    });
 
   const operators: TypeOfOperator[] = [
     { operator: "+" },
@@ -204,7 +209,7 @@ export default function Calculator() {
   return (
     <div className="calculator grid grid-cols-4 grid-flow-row  gap-1 p-1">
       <Display currentView={currentView} historyView={currentHistory}></Display>
-      <Button symbol="CE" isSpan={true} isGray={true} onClick={() => handlerClear()} />
+      <Button symbol="CE" isSpan={true} isGray={true} onClick={() => Clear()} />
       <Button symbol="⇤" isGray={true} onClick={() => handlerDeleteNumber()} />
       <Button
         symbol="/"
