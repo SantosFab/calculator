@@ -86,7 +86,7 @@ export default function Calculator() {
       setSymbol(operation);
       resultOperation === undefined
         ? setCurrentHistory(firstTerm + operation.operator)
-        : setCurrentHistory(resultOperation + operation.operator);
+        : setCurrentHistory(resultOperation.toFixed(2) + operation.operator);
     }
   }
 
@@ -112,9 +112,9 @@ export default function Calculator() {
         currentView === "0" ? firstTerm : parseCurrentView
       );
       setCurrentHistory(
-        `${firstTerm} ${symbol.operator} ${
-          currentView === "0" ? firstTerm : parseCurrentView
-        } = ${result}`
+        `${firstTerm.toFixed(2)} ${symbol.operator} ${
+          currentView === "0" ? firstTerm.toFixed(2) : parseCurrentView.toFixed(2)
+        } = ${result.toFixed(2)}`
       );
       setResultOperation(result);
       setCurrentView("0");
@@ -131,7 +131,7 @@ export default function Calculator() {
       );
       setResultOperation(result);
       setSymbol(operation);
-      setCurrentHistory(result + operation.operator);
+      setCurrentHistory(result.toFixed(2) + operation.operator);
       setCurrentView("0");
     } else if (
       isEqualButton &&
@@ -143,7 +143,7 @@ export default function Calculator() {
     ) {
       result = handlerMathematicalOperationa(resultOperation, symbol, firstTerm);
       setCurrentHistory(
-        `${resultOperation} ${symbol.operator} ${firstTerm} = ${result}`
+        `${resultOperation.toFixed(2)} ${symbol.operator} ${firstTerm.toFixed(2)} = ${result.toFixed(2)}`
       );
       setResultOperation(result);
     } else if (
@@ -158,7 +158,7 @@ export default function Calculator() {
         parseCurrentView
       );
       setCurrentHistory(
-        `${resultOperation} ${symbol.operator} ${parseCurrentView} = ${result}`
+        `${resultOperation.toFixed(2)} ${symbol.operator} ${parseCurrentView.toFixed(2)} = ${result.toFixed(2)}`
       );
       setFirstTerm(parseCurrentView);
       setCurrentView("0");
