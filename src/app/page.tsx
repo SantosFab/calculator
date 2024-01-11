@@ -45,7 +45,7 @@ export default function Calculator() {
 
   function handlerNumberOnCurrentView(numberS: string): void {
     setCurrentView((current) => {
-      if (current.length >= 15) {
+      if (current.length >= 10) {
         return current;
       } else if (current === "0") {
         return numberS;
@@ -57,7 +57,7 @@ export default function Calculator() {
 
   function handlerFraction(): void {
     if (currentView.indexOf(".") === -1) {
-      setCurrentView((current) => currentView + ".");
+      setCurrentView(() => currentView + ".");
     }
     return;
   }
@@ -92,15 +92,15 @@ export default function Calculator() {
 
   function handlerResultOfTheOperation({
     operation,
-    isResult = false,
+    isEqualButton: isEqualButton = false,
   }: {
     operation?: TypeOfOperator;
-    isResult?: boolean;
+    isEqualButton?: boolean;
   }): void {
     let result: number;
     let parseCurrentView: number = parseFloat(currentView);
     if (
-      isResult &&
+      isEqualButton &&
       resultOperation === undefined &&
       firstTerm !== undefined &&
       symbol !== undefined &&
@@ -134,7 +134,7 @@ export default function Calculator() {
       setCurrentHistory(result + operation.operator);
       setCurrentView("0");
     } else if (
-      isResult &&
+      isEqualButton &&
       currentView === "0" &&
       resultOperation !== undefined &&
       symbol !== undefined &&
@@ -147,7 +147,7 @@ export default function Calculator() {
       );
       setResultOperation(result);
     } else if (
-      isResult &&
+      isEqualButton &&
       currentView !== "0" &&
       resultOperation !== undefined &&
       symbol !== undefined
@@ -239,7 +239,7 @@ export default function Calculator() {
       <Button
         symbol="="
         isBlue={true}
-        onClick={() => handlerResultOfTheOperation({ isResult: true })}
+        onClick={() => handlerResultOfTheOperation({ isEqualButton: true })}
       />
     </div>
   );
