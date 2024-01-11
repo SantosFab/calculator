@@ -7,6 +7,7 @@ import {
   operators,
 } from "@/utils/interface/interfaceTypeOfOperator";
 
+import { handlerNumberOnCurrentView } from "@/app/methods/add/handlerNumberOnCurrentiView";
 
 export default function Calculator() {
   const [currentView, setCurrentView] = useState<string>("0");
@@ -35,13 +36,8 @@ export default function Calculator() {
     { operator: "/" },
   ];
 
-  function handlerClear(): void {
-    setCurrentHistory(undefined);
-    setCurrentView("0");
-    setSymbol(undefined);
-    setFirstTerm(undefined);
-    setResultOperation(undefined);
-  }
+  const Add = (numberS: string) =>
+    handlerNumberOnCurrentView({ numberS, setCurrentView });
 
   function handlerDeleteNumber(): void {
     setCurrentView((current) => {
@@ -216,25 +212,25 @@ export default function Calculator() {
         isGray={true}
         onClick={() => handlerOperator(operators[3])}
       />
-      <Button symbol={7} onClick={() => handlerNumberOnCurrentView('7')} />
-      <Button symbol={8} onClick={() => handlerNumberOnCurrentView('8')} />
-      <Button symbol={9} onClick={() => handlerNumberOnCurrentView('9')} />
+      <Button symbol={7} onClick={() => Add('7')} />
+      <Button symbol={8} onClick={() => Add('8')} />
+      <Button symbol={9} onClick={() => Add('9')} />
       <Button
         symbol="*"
         isGray={true}
         onClick={() => handlerOperator(operators[2])}
       />
-      <Button symbol={4} onClick={() => handlerNumberOnCurrentView('4')} />
-      <Button symbol={5} onClick={() => handlerNumberOnCurrentView('5')} />
-      <Button symbol={6} onClick={() => handlerNumberOnCurrentView('6')} />
+      <Button symbol={4} onClick={() => Add('4')} />
+      <Button symbol={5} onClick={() => Add('5')} />
+      <Button symbol={6} onClick={() => Add('6')} />
       <Button
         symbol="-"
         isGray={true}
         onClick={() => handlerOperator(operators[1])}
       />
-      <Button symbol={1} onClick={() => handlerNumberOnCurrentView('1')} />
-      <Button symbol={2} onClick={() => handlerNumberOnCurrentView('2')} />
-      <Button symbol={3} onClick={() => handlerNumberOnCurrentView('3')} />
+      <Button symbol={1} onClick={() => Add('1')} />
+      <Button symbol={2} onClick={() => Add('2')} />
+      <Button symbol={3} onClick={() => Add('3')} />
       <Button
         symbol="+"
         isGray={true}
