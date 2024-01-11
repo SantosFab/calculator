@@ -9,10 +9,29 @@ export default function Calculator() {
   const [currentHistory, setCurrentHistory] = useState<string | undefined>(
     undefined
   );
+  const [symbol, setSymbol] = useState<TypeOfOperator | undefined>(undefined);
+  const [firstTerm, setFirstTerm] = useState<number | undefined>(undefined);
+  const [resultOperation, setResultOperation] = useState<number | undefined>(
+    undefined
+  );
+
+  interface TypeOfOperator {
+    operator: "/" | "*" | "-" | "+";
+  }
+
+  const operators: TypeOfOperator[] = [
+    { operator: "+" },
+    { operator: "-" },
+    { operator: "*" },
+    { operator: "/" },
+  ];
 
   function clear(): void {
     setCurrentHistory(undefined);
     setCurrentView("0");
+    setSymbol(undefined);
+    setFirstTerm(undefined);
+    setResultOperation(undefined);
   }
 
   function deleteNumber(): void {
