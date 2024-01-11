@@ -31,6 +31,7 @@ export function handlerOperator({
   handlerResultOfTheOperation,
 }: HandlerOperatorProps): void {
   if (
+    /* O operador é apertado pela primeira vez */
     currentHistory === undefined &&
     symbol === undefined &&
     firstTerm === undefined &&
@@ -41,6 +42,7 @@ export function handlerOperator({
     setCurrentHistory(currentView + operation.operator);
     setCurrentView("0");
   } else if (
+    /* O calculo é efetuado sem o do '=', exemplo:3+3+2+1, o cliente obtém o 9 no visor */
     currentView !== "0" &&
     currentHistory !== undefined &&
     symbol !== undefined &&
@@ -58,14 +60,12 @@ export function handlerOperator({
       setCurrentHistory,
       setCurrentView,
     });
-    setSymbol(operation);
   } else {
+    /* O operador é apertada, porém a operação matemática era outra, ou seja, troca de operador */
     setSymbol(operation);
     resultOperation === undefined
       ? setCurrentHistory(firstTerm + operation.operator)
-      : setCurrentHistory(
-          parseFloat(resultOperation.toFixed(2)) + operation.operator
-        );
+      : setCurrentHistory(resultOperation + operation.operator);
   }
 }
 
