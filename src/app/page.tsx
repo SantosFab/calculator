@@ -2,13 +2,16 @@
 import { useState } from "react";
 import Button from "@/app/compoments/button/Button";
 import Display from "@/app/compoments/display/Display";
+import { handlerOperator } from "@/app/methods/operator/handlerOperator";
+import { handlerFraction } from "@/app/methods/fraction/handlerFraction";
+import { handlerClear } from "@/app/methods/clear/handlerClear";
 import {
   TypeOfOperator,
   operators,
 } from "@/utils/interface/interfaceTypeOfOperator";
-
 import { handlerNumberOnCurrentView } from "@/app/methods/add/handlerNumberOnCurrentiView";
 import { handlerDeleteNumber } from "@/app/methods/delete/handlerDeleteNumber";
+import { handlerResultOfTheOperation } from "@/app/methods/result/handlerResultOfTheOperation";
 
 export default function Calculator() {
   const [currentView, setCurrentView] = useState<string>("0");
@@ -20,7 +23,7 @@ export default function Calculator() {
   const [resultOperation, setResultOperation] = useState<number | undefined>(
     undefined
   );
-  
+
   const Clear = () =>
     handlerClear({
       setCurrentHistory,
@@ -29,177 +32,71 @@ export default function Calculator() {
       setFirstTerm,
       setResultOperation,
     });
-
-  const operators: TypeOfOperator[] = [
-    { operator: "+" },
-    { operator: "-" },
-    { operator: "*" },
-    { operator: "/" },
-  ];
-
   const Add = (numberS: string) =>
     handlerNumberOnCurrentView({ numberS, setCurrentView });
 
   const Delete = () => handlerDeleteNumber({ setCurrentView });
 
-  function handlerNumberOnCurrentView(numberS: string): void {
-    setCurrentView((current) => {
-      if (current.length >= 10) {
-        return current;
-      } else if (current === "0") {
-        return numberS;
-      } else {
-        return current + numberS;
-      }
+  const IsFraction = () => handlerFraction({ currentView, setCurrentView });
+
+  const Operator = (operation: TypeOfOperator) =>
+    handlerOperator({
+      setCurrentHistory,
+      setCurrentView,
+      setFirstTerm,
+      setSymbol,
+      setResultOperation,
+      currentView,
+      currentHistory,
+      firstTerm,
+      symbol,
+      operation,
+      resultOperation,
+      handlerResultOfTheOperation,
     });
-  }
 
-  function handlerFraction(): void {
-    if (currentView.indexOf(".") === -1) {
-      setCurrentView(() => currentView + ".");
-    }
-    return;
-  }
-
-  function handlerOperator(operation: TypeOfOperator): void {
-    if (
-      currentHistory === undefined &&
-      symbol === undefined &&
-      firstTerm === undefined &&
-      resultOperation === undefined
-    ) {
-      setSymbol(operation);
-      setFirstTerm(parseFloat(currentView));
-      setCurrentHistory(currentView + operation.operator);
-      setCurrentView("0");
-    } else if (
-      currentView !== "0" &&
-      currentHistory !== undefined &&
-      symbol !== undefined &&
-      firstTerm !== undefined &&
-      !handlerSplitStringByOperators()
-    ) {
-      handlerResultOfTheOperation({ operation });
-      setSymbol(operation);
-    } else {
-      setSymbol(operation);
-      resultOperation === undefined
-        ? setCurrentHistory(firstTerm + operation.operator)
-        : setCurrentHistory(resultOperation.toFixed(2) + operation.operator);
-    }
-  }
-
-  function handlerResultOfTheOperation({
+  const Result = ({
     operation,
-    isEqualButton: isEqualButton = false,
+    isEqualButton,
   }: {
     operation?: TypeOfOperator;
     isEqualButton?: boolean;
-  }): void {
-    let result: number;
-    let parseCurrentView: number = parseFloat(currentView);
-    if (
-      isEqualButton &&
-      resultOperation === undefined &&
-      firstTerm !== undefined &&
-      symbol !== undefined &&
-      !handlerSplitStringByOperators()
-    ) {
-      result = handlerMathematicalOperationa(
-        firstTerm,
-        symbol,
-        currentView === "0" ? firstTerm : parseCurrentView
-      );
-      setCurrentHistory(
-        `${firstTerm.toFixed(2)} ${symbol.operator} ${
-          currentView === "0" ? firstTerm.toFixed(2) : parseCurrentView.toFixed(2)
-        } = ${result.toFixed(2)}`
-      );
-      setResultOperation(result);
-      setCurrentView("0");
-    } else if (
-      operation !== undefined &&
-      currentView !== "0" &&
-      firstTerm !== undefined &&
-      symbol !== undefined
-    ) {
-      result = handlerMathematicalOperationa(
-        resultOperation === undefined ? firstTerm : resultOperation,
-        symbol,
-        parseCurrentView
-      );
-      setResultOperation(result);
-      setSymbol(operation);
-      setCurrentHistory(result.toFixed(2) + operation.operator);
-      setCurrentView("0");
-    } else if (
-      isEqualButton &&
-      currentView === "0" &&
-      resultOperation !== undefined &&
-      symbol !== undefined &&
-      firstTerm !== undefined &&
-      handlerSplitStringByOperators()
-    ) {
-      result = handlerMathematicalOperationa(resultOperation, symbol, firstTerm);
-      setCurrentHistory(
-        `${resultOperation.toFixed(2)} ${symbol.operator} ${firstTerm.toFixed(2)} = ${result.toFixed(2)}`
-      );
-      setResultOperation(result);
-    } else if (
-      isEqualButton &&
-      currentView !== "0" &&
-      resultOperation !== undefined &&
-      symbol !== undefined
-    ) {
-      result = handlerMathematicalOperationa(
-        resultOperation,
-        symbol,
-        parseCurrentView
-      );
-      setCurrentHistory(
-        `${resultOperation.toFixed(2)} ${symbol.operator} ${parseCurrentView.toFixed(2)} = ${result.toFixed(2)}`
-      );
-      setFirstTerm(parseCurrentView);
-      setCurrentView("0");
-      setResultOperation(result);
-    }
-  }
-
-  function handlerMathematicalOperationa(
-    numberOne: number,
-    { operator }: TypeOfOperator,
-    numberTwo: number
-  ): number {
-    switch (operator) {
-      case "/":
-        return numberOne / numberTwo;
-      case "*":
-        return numberOne * numberTwo;
-      case "-":
-        return numberOne - numberTwo;
-      case "+":
-        return numberOne + numberTwo;
-      default:
-        throw new Error("Invalid operator");
-    }
-  }
-
-  function handlerSplitStringByOperators(): boolean {
-    if (!currentHistory) {
-      return false;
-    }
-    const result = currentHistory
-      .split(/\/|\*|\-|\+|=/g)
-      .map((item) => parseFloat(item))
-      .filter((num) => !isNaN(num));
-    return result.length > 2;
-  }
+  }) =>
+    handlerResultOfTheOperation({
+      setCurrentHistory,
+      setCurrentView,
+      setFirstTerm,
+      setSymbol,
+      setResultOperation,
+      currentHistory,
+      currentView,
+      firstTerm,
+      symbol,
+      resultOperation,
+      operation,
+      isEqualButton,
+    });
 
   return (
     <div className="calculator grid grid-cols-4 grid-flow-row  gap-1 p-1">
       <Display currentView={currentView} historyView={currentHistory}></Display>
       <Button symbol="CE" isSpan={true} isGray={true} onClick={() => Clear()} />
       <Button symbol="⇤" isGray={true} onClick={() => Delete()} />
+      <Button symbol="/" isGray={true} onClick={() => Operator(operators[3])} />
+      <Button symbol={7} onClick={() => Add("7")} />
+      <Button symbol={8} onClick={() => Add("8")} />
+      <Button symbol={9} onClick={() => Add("9")} />
+      <Button symbol="*" isGray={true} onClick={() => Operator(operators[2])} />
+      <Button symbol={4} onClick={() => Add("4")} />
+      <Button symbol={5} onClick={() => Add("5")} />
+      <Button symbol={6} onClick={() => Add("6")} />
+      <Button symbol="-" isGray={true} onClick={() => Operator(operators[1])} />
+      <Button symbol={1} onClick={() => Add("1")} />
+      <Button symbol={2} onClick={() => Add("2")} />
+      <Button symbol={3} onClick={() => Add("3")} />
+      <Button symbol="+" isGray={true} onClick={() => Operator(operators[0])} />
+      <Button symbol={0} isSpan={true} onClick={() => Add("0")} />
+      <Button symbol="." onClick={() => IsFraction()} />
       <Button
         symbol="="
         isBlue={true}
