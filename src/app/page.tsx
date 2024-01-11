@@ -2,16 +2,16 @@
 import { useState } from "react";
 import Button from "@/app/compoments/button/Button";
 import Display from "@/app/compoments/display/Display";
-import { handlerOperator } from "@/app/methods/operator/handlerOperator";
-import { handlerFraction } from "@/app/methods/fraction/handlerFraction";
-import { handlerClear } from "@/app/methods/clear/handlerClear";
 import {
   TypeOfOperator,
   operators,
 } from "@/utils/interface/interfaceTypeOfOperator";
-import { handlerNumberOnCurrentView } from "@/app/methods/add/handlerNumberOnCurrentiView";
+import { handlerClear } from "@/app/methods/clear/handlerClear";
 import { handlerDeleteNumber } from "@/app/methods/delete/handlerDeleteNumber";
+import { handlerFraction } from "@/app/methods/fraction/handlerFraction";
+import { handlerNumberOnCurrentView } from "@/app/methods/add/handlerNumberOnCurrentiView";
 import { handlerResultOfTheOperation } from "@/app/methods/result/handlerResultOfTheOperation";
+import { handlerOperator } from "@/app/methods/operator/handlerOperator";
 
 export default function Calculator() {
   const [currentView, setCurrentView] = useState<string>("0");
@@ -24,6 +24,9 @@ export default function Calculator() {
     undefined
   );
 
+  const Add = (numberS: string) =>
+    handlerNumberOnCurrentView({ numberS, setCurrentView });
+
   const Clear = () =>
     handlerClear({
       setCurrentHistory,
@@ -32,8 +35,6 @@ export default function Calculator() {
       setFirstTerm,
       setResultOperation,
     });
-  const Add = (numberS: string) =>
-    handlerNumberOnCurrentView({ numberS, setCurrentView });
 
   const Delete = () => handlerDeleteNumber({ setCurrentView });
 
