@@ -83,7 +83,6 @@ export function handlerResultOfTheOperation({
     firstTerm !== undefined &&
     handlerSplitStringByOperators(currentHistory)
     ) {
-    console.log('teste')
     result = handlerMathematicalOperationa(resultOperation, symbol, firstTerm);
     setCurrentHistory(
       `${resultOperation} ${symbol.operator} ${firstTerm} = ${result}`
