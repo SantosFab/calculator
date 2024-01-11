@@ -3,11 +3,10 @@ import styles from "./styles.module.css";
 
 interface ButtonProps {
   symbol: string | number;
-  onClick?: (event: MouseEvent<HTMLDivElement>) => void;
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
   isSpan?: boolean;
   isBlue?: boolean;
   isGray?: boolean;
-  isGrayLight?: boolean;
 }
 
 const Button: FunctionComponent<ButtonProps> = ({
@@ -16,10 +15,9 @@ const Button: FunctionComponent<ButtonProps> = ({
   isSpan = false,
   isBlue = false,
   isGray = false,
-  isGrayLight = false,
 }) => {
   return (
-    <div
+    <button
       className={` flex justify-center items-center 
       ${styles.button} 
       ${isSpan && "col-span-2"} 
@@ -29,7 +27,7 @@ const Button: FunctionComponent<ButtonProps> = ({
       onClick={onClick}
     >
       {symbol}
-    </div>
+    </button>
   );
 };
 
