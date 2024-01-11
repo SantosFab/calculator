@@ -6,12 +6,12 @@ import {
   TypeOfOperator,
   operators,
 } from "@/utils/interface/interfaceTypeOfOperator";
-import { handlerClear } from "@/app/methods/clear/handlerClear";
-import { handlerDeleteNumber } from "@/app/methods/delete/handlerDeleteNumber";
-import { handlerFraction } from "@/app/methods/fraction/handlerFraction";
-import { handlerNumberOnCurrentView } from "@/app/methods/add/handlerNumberOnCurrentiView";
-import { handlerResultOfTheOperation } from "@/app/methods/result/handlerResultOfTheOperation";
-import { handlerOperator } from "@/app/methods/operator/handlerOperator";
+import { handlerClear } from "@/methods/clear/handlerClear";
+import { handlerDeleteNumber } from "@/methods/delete/handlerDeleteNumber";
+import { handlerFraction } from "@/methods/fraction/handlerFraction";
+import { handlerNumberOnCurrentView } from "@/methods/add/handlerNumberOnCurrentiView";
+import { handlerResultOfTheOperation } from "@/methods/result/handlerResultOfTheOperation";
+import { handlerOperator } from "@/methods/operator/handlerOperator";
 
 export default function Calculator() {
   const [currentView, setCurrentView] = useState<string>("0");
