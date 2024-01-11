@@ -1,7 +1,7 @@
 "use client";
-import { useState, useEffect } from "react";
-import Button from "@/compoments/button/Button";
-import Display from "@/compoments/display/Display";
+import { useState } from "react";
+import Button from "@/app/compoments/button/Button";
+import Display from "@/app/compoments/display/Display";
 
 export default function Calculator() {
   const [currentView, setCurrentView] = useState<string>("0");
