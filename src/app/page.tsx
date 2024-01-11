@@ -26,7 +26,7 @@ export default function Calculator() {
     { operator: "/" },
   ];
 
-  function clear(): void {
+  function handlerClear(): void {
     setCurrentHistory(undefined);
     setCurrentView("0");
     setSymbol(undefined);
@@ -34,7 +34,7 @@ export default function Calculator() {
     setResultOperation(undefined);
   }
 
-  function deleteNumber(): void {
+  function handlerDeleteNumber(): void {
     setCurrentView((current) => {
       if (current.length > 1) {
         return current.slice(0, -1);
@@ -44,26 +44,19 @@ export default function Calculator() {
     });
   }
 
-  function addNumberOnCurrentView(number: number): void {
-    const SNumber: string = number.toString();
+  function handlerNumberOnCurrentView(numberS: string): void {
     setCurrentView((current) => {
       if (current.length >= 15) {
         return current;
       } else if (current === "0") {
-        return SNumber;
+        return numberS;
       } else {
-        return current + SNumber;
+        return current + numberS;
       }
     });
   }
 
-  function addOperation(symbol: string): void {
-    setSymbol(symbol);
-    setCurrentHistory(currentView + symbol);
-    setCurrentView("0");
-  }
-
-  function addFraction(): void {
+  function handlerFraction(): void {
     if (currentView.indexOf(".") === -1) {
       setCurrentView((current) => currentView + ".");
     }
@@ -73,28 +66,48 @@ export default function Calculator() {
   return (
     <div className="calculator grid grid-cols-4 grid-flow-row  gap-1 p-1">
       <Display currentView={currentView} historyView={currentHistory}></Display>
-      <Button symbol="CE" isSpan={true} isGray={true} onClick={() => clear()} />
-      <Button symbol="⇤" isGray={true} onClick={() => deleteNumber()} />
-      <Button symbol="/" isGray={true} onClick={() => addOperation("/")} />
-      <Button symbol={7} onClick={() => addNumberOnCurrentView(7)} />
-      <Button symbol={8} onClick={() => addNumberOnCurrentView(8)} />
-      <Button symbol={9} onClick={() => addNumberOnCurrentView(9)} />
-      <Button symbol="*" isGray={true} onClick={() => addOperation("*")} />
-      <Button symbol={4} onClick={() => addNumberOnCurrentView(4)} />
-      <Button symbol={5} onClick={() => addNumberOnCurrentView(5)} />
-      <Button symbol={6} onClick={() => addNumberOnCurrentView(6)} />
-      <Button symbol="-" isGray={true} onClick={() => addOperation("-")} />
-      <Button symbol={1} onClick={() => addNumberOnCurrentView(1)} />
-      <Button symbol={2} onClick={() => addNumberOnCurrentView(2)} />
-      <Button symbol={3} onClick={() => addNumberOnCurrentView(3)} />
-      <Button symbol="+" isGray={true} onClick={() => addOperation("+")} />
+      <Button symbol="CE" isSpan={true} isGray={true} onClick={() => handlerClear()} />
+      <Button symbol="⇤" isGray={true} onClick={() => handlerDeleteNumber()} />
+      <Button
+        symbol="/"
+        isGray={true}
+        onClick={() => handlerOperator(operators[3])}
+      />
+      <Button symbol={7} onClick={() => handlerNumberOnCurrentView('7')} />
+      <Button symbol={8} onClick={() => handlerNumberOnCurrentView('8')} />
+      <Button symbol={9} onClick={() => handlerNumberOnCurrentView('9')} />
+      <Button
+        symbol="*"
+        isGray={true}
+        onClick={() => handlerOperator(operators[2])}
+      />
+      <Button symbol={4} onClick={() => handlerNumberOnCurrentView('4')} />
+      <Button symbol={5} onClick={() => handlerNumberOnCurrentView('5')} />
+      <Button symbol={6} onClick={() => handlerNumberOnCurrentView('6')} />
+      <Button
+        symbol="-"
+        isGray={true}
+        onClick={() => handlerOperator(operators[1])}
+      />
+      <Button symbol={1} onClick={() => handlerNumberOnCurrentView('1')} />
+      <Button symbol={2} onClick={() => handlerNumberOnCurrentView('2')} />
+      <Button symbol={3} onClick={() => handlerNumberOnCurrentView('3')} />
+      <Button
+        symbol="+"
+        isGray={true}
+        onClick={() => handlerOperator(operators[0])}
+      />
       <Button
         symbol={0}
         isSpan={true}
-        onClick={() => addNumberOnCurrentView(0)}
+        onClick={() => handlerNumberOnCurrentView('0')}
       />
-      <Button symbol="." onClick={() => addFraction()} />
-      <Button symbol="=" isBlue={true} />
+      <Button symbol="." onClick={() => handlerFraction()} />
+      <Button
+        symbol="="
+        isBlue={true}
+        onClick={() => handlerResultOfTheOperation({ isResult: true })}
+      />
     </div>
   );
 }
