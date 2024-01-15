@@ -1,5 +1,5 @@
 import { handlerDeleteNumber } from "@/methods/delete/handlerDeleteNumber";
-import { setCurrentViewMock } from "../../Mock/setMock";
+import { setCurrentViewMock } from "../../../__test__/Mock/setMock";
 
 describe("handlerDeleteNumber", () => {
   it("Deve deletar o último caractere da string se a string tiver mais de um caractere", () => {

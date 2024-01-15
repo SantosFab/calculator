@@ -1,6 +1,6 @@
 import { handlerNumberOnCurrentView } from "@/methods/add/handlerNumberOnCurrentiView";
 import { SetStateAction } from "react";
-import { setCurrentViewMock } from "../../Mock/setMock";
+import { setCurrentViewMock } from "../../../__test__/Mock/setMock";
 
 describe("handlerNumberOnCurrentView", () => {
   /* Testando uma forma diferente do uso do Mock, acho o caso posterior mais elegante */

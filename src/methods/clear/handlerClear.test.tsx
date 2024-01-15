@@ -5,7 +5,7 @@ import {
   setFirtTermMock as setFirstTermMock,
   setResultOperationMock,
   setSymbolMock,
-} from "../../Mock/setMock";
+} from "../../../__test__/Mock/setMock";
 
 describe("handlerClear", () => {
   it("Resetar todos os estados", () => {
