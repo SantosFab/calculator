@@ -70,10 +70,7 @@ export function handlerOperator({
 }
 
 function handlerSplitStringByOperators(currentHistory: string): boolean {
-  if (!currentHistory) {
-    return false;
-  }
-  const result = currentHistory
+    const result = currentHistory
     .split(/\/|\*|\-|\+|=/g)
     .map((item) => parseFloat(item))
     .filter((num) => !isNaN(num));
