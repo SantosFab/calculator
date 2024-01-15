@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import Button from "@/app/compoments/button/Button";
-import Display from "@/app/compoments/display/Display";
+import Button from "@/app/components/button/Button";
+import Display from "@/app/components/display/Display";
 import {
   TypeOfOperator,
   operators,
