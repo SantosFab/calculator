@@ -1,11 +1,9 @@
 import { handlerNumberOnCurrentView } from "@/methods/add/handlerNumberOnCurrentiView";
-import { Dispatch, SetStateAction } from "react";
+import {  SetStateAction } from "react";
+import { setCurrentViewMock } from "../../Mock/setMock";
 
 describe("handlerNumberOnCurrentView", () => {
-  const setCurrentViewMock = jest.fn() as jest.Mock<
-    Dispatch<SetStateAction<string>>
-  >;
-
+  
   it("O primeiro número digitado é zero, não a incremento de número no visor ex:00", () => {
     let updateFunction: SetStateAction<string> = "";
 
@@ -26,7 +24,7 @@ describe("handlerNumberOnCurrentView", () => {
   });
 
   it("Adicionando um número há um estado anterior ", () => {
-     handlerNumberOnCurrentView({
+    handlerNumberOnCurrentView({
       setCurrentView: setCurrentViewMock,
       numberS: "5",
     });
@@ -43,10 +41,8 @@ describe("handlerNumberOnCurrentView", () => {
       setCurrentViewMock.mock.calls[2][0];
 
     const updatedState2 = updateFunction2(updatedState1);
-    
+
     expect(updatedState2).toBe("56");
-    expect(setCurrentViewMock).toHaveBeenCalledTimes(3);
-    expect(setCurrentViewMock).toHaveBeenCalledWith(expect.any(Function));
   });
 
   it("O número adicionado é maior que 10", () => {
@@ -61,5 +57,7 @@ describe("handlerNumberOnCurrentView", () => {
     const updatedState1 = updateFunction1("");
 
     expect(updatedState1).toBe("");
+    expect(setCurrentViewMock).toHaveBeenCalledTimes(4);
+    expect(setCurrentViewMock).toHaveBeenCalledWith(expect.any(Function));
   });
 });
