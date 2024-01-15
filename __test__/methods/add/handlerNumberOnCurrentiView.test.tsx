@@ -1,9 +1,9 @@
 import { handlerNumberOnCurrentView } from "@/methods/add/handlerNumberOnCurrentiView";
-import {  SetStateAction } from "react";
+import { SetStateAction } from "react";
 import { setCurrentViewMock } from "../../Mock/setMock";
 
 describe("handlerNumberOnCurrentView", () => {
-  
+  /* Testando uma forma diferente do uso do Mock, acho o caso posterior mais elegante */
   it("O primeiro número digitado é zero, não a incremento de número no visor ex:00", () => {
     let updateFunction: SetStateAction<string> = "";
 
@@ -37,6 +37,7 @@ describe("handlerNumberOnCurrentView", () => {
       setCurrentViewMock.mock.calls[1][0];
 
     const updatedState1 = updateFunction1("");
+
     const updateFunction2: (prevState: string) => string =
       setCurrentViewMock.mock.calls[2][0];
 
