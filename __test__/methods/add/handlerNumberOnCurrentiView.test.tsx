@@ -39,14 +39,10 @@ describe("handlerNumberOnCurrentView", () => {
       setCurrentViewMock.mock.calls[1][0];
 
     const updatedState1 = updateFunction1("");
-    console.log(updatedState1)
-
     const updateFunction2: (prevState: string) => string =
       setCurrentViewMock.mock.calls[2][0];
 
     const updatedState2 = updateFunction2(updatedState1);
-    console.log("updatedState1:", updatedState1);
-    console.log("updatedState2:", updatedState2);
     
     expect(updatedState2).toBe("56");
     expect(setCurrentViewMock).toHaveBeenCalledTimes(3);
