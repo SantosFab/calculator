@@ -2,7 +2,7 @@ import { handlerClear } from "@/methods/clear/handlerClear";
 import {
   setCurrentHistoryMock,
   setCurrentViewMock,
-  setFirtTermMock as setFirstTermMock,
+  setFirstTermMock,
   setResultOperationMock,
   setSymbolMock,
 } from "../../../__test__/Mock/setMock";
