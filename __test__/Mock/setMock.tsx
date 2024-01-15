@@ -1,5 +1,5 @@
 import { TypeOfOperator } from "@/utils/interface/interfaceTypeOfOperator";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch } from "react";
 
 export const setCurrentHistoryMock = jest.fn() as jest.Mock<
   Dispatch<string | undefined>
@@ -11,6 +11,6 @@ export const setSymbolMock = jest.fn() as jest.Mock<
 export const setFirtTermMock = jest.fn() as jest.Mock<
   Dispatch<number | undefined>
 >;
-export const setResultOperation = jest.fn() as jest.Mock<
+export const setResultOperationMock = jest.fn() as jest.Mock<
   Dispatch<number | undefined>
 >;
