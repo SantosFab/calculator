@@ -6,6 +6,7 @@ import {
   TypeOfOperator,
   operators,
 } from "@/utils/interface/interfaceTypeOfOperator";
+import { numbers } from "@/utils/interface/interfaceTypeOfNumbers";
 import { handlerClear } from "@/methods/clear/handlerClear";
 import { handlerDeleteNumber } from "@/methods/delete/handlerDeleteNumber";
 import { handlerFraction } from "@/methods/fraction/handlerFraction";
@@ -14,7 +15,12 @@ import { handlerResultOfTheOperation } from "@/methods/result/handlerResultOfThe
 import { handlerOperator } from "@/methods/operator/handlerOperator";
 
 export default function Calculator() {
-  const [currentView, setCurrentView] = useState<string>("0");
+  const { one, two, three, four, five, six, seven, eight, nine, zero } =
+    numbers;
+
+  const { add, subtract, multiply, divide } = operators;
+
+  const [currentView, setCurrentView] = useState<string>(zero.number);
   const [currentHistory, setCurrentHistory] = useState<string | undefined>(
     undefined
   );
@@ -83,19 +89,35 @@ export default function Calculator() {
       <Display currentView={currentView} historyView={currentHistory}></Display>
       <Button symbol="CE" isSpan={true} isGray={true} onClick={() => Clear()} />
       <Button symbol="⇤" isGray={true} onClick={() => Delete()} />
-      <Button symbol="/" isGray={true} onClick={() => Operator(operators[3])} />
-      <Button symbol={7} onClick={() => Add("7")} />
-      <Button symbol={8} onClick={() => Add("8")} />
-      <Button symbol={9} onClick={() => Add("9")} />
-      <Button symbol="*" isGray={true} onClick={() => Operator(operators[2])} />
-      <Button symbol={4} onClick={() => Add("4")} />
-      <Button symbol={5} onClick={() => Add("5")} />
-      <Button symbol={6} onClick={() => Add("6")} />
-      <Button symbol="-" isGray={true} onClick={() => Operator(operators[1])} />
-      <Button symbol={1} onClick={() => Add("1")} />
-      <Button symbol={2} onClick={() => Add("2")} />
-      <Button symbol={3} onClick={() => Add("3")} />
-      <Button symbol="+" isGray={true} onClick={() => Operator(operators[0])} />
+      <Button
+        symbol={divide.operator}
+        isGray={true}
+        onClick={() => Operator(divide)}
+      />
+      <Button symbol={7} onClick={() => Add(seven.number)} />
+      <Button symbol={8} onClick={() => Add(eight.number)} />
+      <Button symbol={9} onClick={() => Add(nine.number)} />
+      <Button
+        symbol={multiply.operator}
+        isGray={true}
+        onClick={() => Operator(multiply)}
+      />
+      <Button symbol={4} onClick={() => Add(four.number)} />
+      <Button symbol={5} onClick={() => Add(five.number)} />
+      <Button symbol={6} onClick={() => Add(six.number)} />
+      <Button
+        symbol={subtract.operator}
+        isGray={true}
+        onClick={() => Operator(subtract)}
+      />
+      <Button symbol={1} onClick={() => Add(one.number)} />
+      <Button symbol={2} onClick={() => Add(two.number)} />
+      <Button symbol={3} onClick={() => Add(three.number)} />
+      <Button
+        symbol={add.operator}
+        isGray={true}
+        onClick={() => Operator(add)}
+      />
       <Button symbol={0} isSpan={true} onClick={() => Add("0")} />
       <Button symbol="." onClick={() => IsFraction()} />
       <Button

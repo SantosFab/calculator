@@ -8,25 +8,19 @@ import {
   setResultOperationMock,
   setSymbolMock,
 } from "../../../__test__/Mock/setMock";
+import { numbers } from "@/utils/interface/interfaceTypeOfNumbers";
 
 describe("handlerFraction", () => {
-  const currentHistoryUndefined: undefined = undefined;
-  const firstTermUndefined: undefined = undefined;
-  const symbolUndefined: undefined = undefined;
-  const resultOperationUndefined: undefined = undefined;
+  const undefinedProperty: undefined = undefined;
 
-  const add = operators[0];
-  const subtract = operators[1];
-  const multiply = operators[2];
-  const divide = operators[3];
+  const { add, subtract, multiply, divide } = operators;
+  
+  const {zero, one , two, three} = numbers;
+  
+  const oneN: number = 1;
+  const twoN: number = 2;
+  const threeN: number = 3;
 
-  const one: number = 1;
-  const two: number = 2;
-  const three: number = 3;
-
-  const zeroS: string = "0";
-  const oneS: string = "1";
-  const twoS: string = "2";
 
   const displayOnePositive: string = `${one}${add.operator}`;
   const displayTwoNegative: string = `${two}${subtract.operator}`;
@@ -43,18 +37,18 @@ describe("handlerFraction", () => {
       setFirstTerm: setFirstTermMock,
       setResultOperation: setResultOperationMock,
       setSymbol: setSymbolMock,
-      currentHistory: currentHistoryUndefined,
-      currentView: oneS,
-      firstTerm: firstTermUndefined,
+      currentHistory: undefinedProperty,
+      currentView: one.number,
+      firstTerm: undefinedProperty,
       handlerResultOfTheOperation,
       operation: add,
-      resultOperation: resultOperationUndefined,
-      symbol: symbolUndefined,
+      resultOperation: undefinedProperty,
+      symbol: undefinedProperty,
     });
     expect(setSymbolMock).toHaveBeenCalledWith(add);
     expect(setFirstTermMock).toHaveBeenCalledWith(1);
     expect(setCurrentHistoryMock).toHaveBeenCalledWith(displayOnePositive);
-    expect(setCurrentViewMock).toHaveBeenCalledWith(zeroS);
+    expect(setCurrentViewMock).toHaveBeenCalledWith(zero.number);
     expect(setResultOperationMock).not.toHaveBeenCalled();
   });
 
@@ -66,18 +60,18 @@ describe("handlerFraction", () => {
       setResultOperation: setResultOperationMock,
       setSymbol: setSymbolMock,
       currentHistory: displayThreeNegative,
-      firstTerm: three,
+      firstTerm: threeN,
       symbol: subtract,
-      currentView: oneS,
+      currentView: one.number,
       operation: subtract,
       handlerResultOfTheOperation,
-      resultOperation: resultOperationUndefined,
+      resultOperation: undefinedProperty,
     });
 
     expect(setResultOperationMock).toHaveBeenCalledWith(two);
     expect(setSymbolMock).toHaveBeenCalledWith(subtract);
     expect(setCurrentHistoryMock).toHaveBeenCalledWith(displayTwoNegative);
-    expect(setCurrentViewMock).toHaveBeenCalledWith(zeroS);
+    expect(setCurrentViewMock).toHaveBeenCalledWith(zero.number);
     expect(setFirstTermMock).not.toHaveBeenCalled();
   });
 
@@ -88,13 +82,13 @@ describe("handlerFraction", () => {
       setFirstTerm: setFirstTermMock,
       setResultOperation: setResultOperationMock,
       setSymbol: setSymbolMock,
-      currentHistory: oneS,
-      firstTerm: three,
+      currentHistory: one.number,
+      firstTerm: threeN,
       symbol: add,
       operation: subtract,
-      currentView: zeroS,
+      currentView: zero.number,
       handlerResultOfTheOperation,
-      resultOperation: resultOperationUndefined,
+      resultOperation: undefinedProperty,
     });
 
     expect(setSymbolMock).toHaveBeenCalledWith(subtract);
@@ -111,13 +105,13 @@ describe("handlerFraction", () => {
       setFirstTerm: setFirstTermMock,
       setResultOperation: setResultOperationMock,
       setSymbol: setSymbolMock,
-      currentHistory: oneS,
-      firstTerm: firstTermUndefined,
-      symbol: symbolUndefined,
+      currentHistory: one.number,
+      firstTerm: undefinedProperty,
+      symbol: undefinedProperty,
       operation: subtract,
-      currentView: zeroS,
+      currentView: zero.number,
       handlerResultOfTheOperation,
-      resultOperation: two,
+      resultOperation: twoN,
     });
 
     expect(setSymbolMock).toHaveBeenCalledWith(subtract);
