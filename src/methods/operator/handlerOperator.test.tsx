@@ -10,21 +10,19 @@ import {
 } from "../../../__test__/Mock/setMock";
 import { numbers } from "@/utils/interface/number/interfaceTypeOfNumbers";
 
-describe("handlerFraction", () => {
+describe("handlerOperatior", () => {
   const undefinedProperty: undefined = undefined;
 
   const { add, subtract, multiply, divide } = operators;
   
   const {zero, one , two, three} = numbers;
   
-  const oneN: number = 1;
   const twoN: number = 2;
   const threeN: number = 3;
 
-
-  const displayOnePositive: string = `${one}${add.operator}`;
-  const displayTwoNegative: string = `${two}${subtract.operator}`;
-  const displayThreeNegative: string = `${three}${subtract.operator}`;
+  const displayOnePositive: string = `${one.number}${add.operator}`;
+  const displayTwoNegative: string = `${two.number}${subtract.operator}`;
+  const displayThreeNegative: string = `${three.number}${subtract.operator}`;
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -68,7 +66,7 @@ describe("handlerFraction", () => {
       resultOperation: undefinedProperty,
     });
 
-    expect(setResultOperationMock).toHaveBeenCalledWith(two);
+    expect(setResultOperationMock).toHaveBeenCalledWith(twoN);
     expect(setSymbolMock).toHaveBeenCalledWith(subtract);
     expect(setCurrentHistoryMock).toHaveBeenCalledWith(displayTwoNegative);
     expect(setCurrentViewMock).toHaveBeenCalledWith(zero.number);

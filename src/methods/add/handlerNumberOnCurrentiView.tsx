@@ -11,10 +11,8 @@ export function handlerNumberOnCurrentView({
   typeOfNumber,
 }: HandlerNumberOnCurrentViewProps): void {
   setCurrentView((current) => {
-    if (current.length >= 10) {
+    if (current.length >= 10 || current === "0") {
       return current;
-    } else if (current === "0") {
-      return typeOfNumber.number;
     } else {
       return current + typeOfNumber.number;
     }

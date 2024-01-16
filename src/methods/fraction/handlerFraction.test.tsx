@@ -1,8 +1,8 @@
 import { handlerFraction } from "@/methods/fraction/handlerFraction";
 import { setCurrentViewMock } from "../../../__test__/Mock/setMock";
 
-describe("Teste para handlerFraction", () => {
-  it("Não deve adicionar um ponto se já houver ponto na string", () => {
+describe("handlerFraction", () => {
+  it("Não deverá adicionar um ponto se já houver ponto na string", () => {
     handlerFraction({
       currentView: "1.1",
       setCurrentView: setCurrentViewMock,
@@ -11,7 +11,7 @@ describe("Teste para handlerFraction", () => {
     expect(setCurrentViewMock).not.toHaveBeenCalled();
   });
 
-  it("Deve adicionar um ponto à string se não houver ponto", () => {
+  it("Deverá adicionar um ponto à string se não houver ponto", () => {
     handlerFraction({
       currentView: "123",
       setCurrentView: setCurrentViewMock,
