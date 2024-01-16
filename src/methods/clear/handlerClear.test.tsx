@@ -9,17 +9,20 @@ import {
 
 describe("handlerClear", () => {
   it("Resetar todos os estados", () => {
-    handlerClear({
+    const mockData = {
       setCurrentHistory: setCurrentHistoryMock,
       setCurrentView: setCurrentViewMock,
       setFirstTerm: setFirstTermMock,
       setResultOperation: setResultOperationMock,
       setSymbol: setSymbolMock,
-    });
-    expect(setCurrentHistoryMock).toHaveBeenCalledWith(undefined)
-    expect(setCurrentViewMock).toHaveBeenCalledWith('0')
-    expect(setFirstTermMock).toHaveBeenCalledWith(undefined)
-    expect(setResultOperationMock).toHaveBeenCalledWith(undefined)
-    expect(setSymbolMock).toHaveBeenCalledWith(undefined)
+    };
+
+    handlerClear(mockData);
+
+    expect(setCurrentHistoryMock).toHaveBeenCalledWith(undefined);
+    expect(setCurrentViewMock).toHaveBeenCalledWith("0");
+    expect(setFirstTermMock).toHaveBeenCalledWith(undefined);
+    expect(setResultOperationMock).toHaveBeenCalledWith(undefined);
+    expect(setSymbolMock).toHaveBeenCalledWith(undefined);
   });
 });
