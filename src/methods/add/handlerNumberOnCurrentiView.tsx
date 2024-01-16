@@ -11,10 +11,12 @@ export function handlerNumberOnCurrentView({
   typeOfNumber,
 }: HandlerNumberOnCurrentViewProps): void {
   setCurrentView((current) => {
-    if (current.length >= 10 || current === "0") {
+    if (current.length >= 10) {
       return current;
     } else {
-      return current + typeOfNumber.number;
+      return current === "0"
+        ? typeOfNumber.number
+        : current + typeOfNumber.number;
     }
   });
 }
