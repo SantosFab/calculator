@@ -1,17 +1,18 @@
 import { handlerNumberOnCurrentView } from "@/methods/add/handlerNumberOnCurrentiView";
-import { SetStateAction } from "react";
 import { setCurrentViewMock } from "../../../__test__/Mock/setMock";
 import { numbers } from "@/utils/interface/number/interfaceTypeOfNumbers";
-import { mock } from "node:test";
 
 describe("handlerNumberOnCurrentView", () => {
+  const createMockData = (overrides = {}) => ({
+    setCurrentView: setCurrentViewMock,
+    typeOfNumber: zero,
+    ...overrides,
+  });
+
   const { zero, five, six } = numbers;
 
   it("O primeiro número digitado é zero, não a incremento de número no visor ex:00", () => {
-    const mockData = {
-      setCurrentView: setCurrentViewMock,
-      typeOfNumber: zero,
-    };
+    const mockData = createMockData();
 
     handlerNumberOnCurrentView(mockData);
 
@@ -24,15 +25,13 @@ describe("handlerNumberOnCurrentView", () => {
   });
 
   it("Adicionando um número há um estado anterior ", () => {
-    const mockDataOne = {
-      setCurrentView: setCurrentViewMock,
+    const mockDataOne = createMockData({
       typeOfNumber: five,
-    };
+    });
 
-    const mockDataTwo = {
-      setCurrentView: setCurrentViewMock,
+    const mockDataTwo = createMockData({
       typeOfNumber: six,
-    };
+    });
 
     handlerNumberOnCurrentView(mockDataOne);
 

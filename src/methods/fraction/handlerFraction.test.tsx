@@ -2,11 +2,16 @@ import { handlerFraction } from "@/methods/fraction/handlerFraction";
 import { setCurrentViewMock } from "../../../__test__/Mock/setMock";
 
 describe("handlerFraction", () => {
+  const createMockData = (overrides = {}) => ({
+    currentView: "0",
+    setCurrentView: setCurrentViewMock,
+    ...overrides
+  });
+
   it("Não deverá adicionar um ponto se já houver ponto na string", () => {
-    const mockData = {
+    const mockData = createMockData({
       currentView: "1.1",
-      setCurrentView: setCurrentViewMock,
-    };
+    });
 
     handlerFraction(mockData);
 
@@ -14,10 +19,9 @@ describe("handlerFraction", () => {
   });
 
   it("Deverá adicionar um ponto à string se não houver ponto", () => {
-    const mockData = {
+    const mockData = createMockData({
       currentView: "123",
-      setCurrentView: setCurrentViewMock,
-    };
+    });
 
     handlerFraction(mockData);
 

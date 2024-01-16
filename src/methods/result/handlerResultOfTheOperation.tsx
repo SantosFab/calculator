@@ -75,14 +75,14 @@ export function handlerResultOfTheOperation({
     setCurrentHistory(result + operation.operator);
     setCurrentView("0");
   } else if (
-    /* O cliente realizou sua primeira operação, porém deseja continuar operações subsequentes com o mesmo primeiro, exemplo 3+3=6 +> 6+3=9 9+3 => 12... */
+    /*operações sequenciais com o mesmo termo, exemplo (PA de 3): 3+3=6 +> 6+3=9 9+3 => 12... */
     isEqualButton &&
     currentView === "0" &&
     resultOperation !== undefined &&
     symbol !== undefined &&
     firstTerm !== undefined &&
     handlerSplitStringByOperators(currentHistory)
-    ) {
+  ) {
     result = handlerMathematicalOperationa(resultOperation, symbol, firstTerm);
     setCurrentHistory(
       `${resultOperation} ${symbol.operator} ${firstTerm} = ${result}`
@@ -113,7 +113,6 @@ export function handlerResultOfTheOperation({
     { operator }: TypeOfOperator,
     numberTwo: number
   ): number {
-
     function formatNumber(value: number): number {
       return parseFloat(value.toFixed(2));
     }
@@ -127,8 +126,6 @@ export function handlerResultOfTheOperation({
         return formatNumber(numberOne - numberTwo);
       case "+":
         return formatNumber(numberOne + numberTwo);
-      default:
-        throw new Error("Invalid operator");
     }
   }
 
