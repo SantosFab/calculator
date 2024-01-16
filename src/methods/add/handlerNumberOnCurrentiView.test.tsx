@@ -1,8 +1,10 @@
 import { handlerNumberOnCurrentView } from "@/methods/add/handlerNumberOnCurrentiView";
 import { SetStateAction } from "react";
 import { setCurrentViewMock } from "../../../__test__/Mock/setMock";
+import { numbers } from "@/utils/interface/number/interfaceTypeOfNumbers";
 
 describe("handlerNumberOnCurrentView", () => {
+  const  {zero, five, six} = numbers
   /* Testando uma forma diferente do uso do Mock, acho o caso posterior mais elegante */
   it("O primeiro número digitado é zero, não a incremento de número no visor ex:00", () => {
     let updateFunction: SetStateAction<string> = "";
@@ -12,7 +14,7 @@ describe("handlerNumberOnCurrentView", () => {
         updateFunction = func;
         setCurrentViewMock();
       },
-      numberS: "0",
+      typeOfNumber: zero,
     });
 
     const updatedState =
@@ -26,11 +28,11 @@ describe("handlerNumberOnCurrentView", () => {
   it("Adicionando um número há um estado anterior ", () => {
     handlerNumberOnCurrentView({
       setCurrentView: setCurrentViewMock,
-      numberS: "5",
+      typeOfNumber: five,
     });
     handlerNumberOnCurrentView({
       setCurrentView: setCurrentViewMock,
-      numberS: "6",
+      typeOfNumber: six,
     });
 
     const updateFunction1: (prevState: string) => string =
@@ -46,10 +48,10 @@ describe("handlerNumberOnCurrentView", () => {
     expect(updatedState2).toBe("56");
   });
 
-  it("O número adicionado é maior que 10", () => {
+  /* it("O número adicionado é maior que 10", () => {
     handlerNumberOnCurrentView({
       setCurrentView: setCurrentViewMock,
-      numberS: "12345678910",
+      typeOfNumber: "12345678910",
     });
 
     const updateFunction1: (prevState: string) => string =
@@ -60,5 +62,5 @@ describe("handlerNumberOnCurrentView", () => {
     expect(updatedState1).toBe("");
     expect(setCurrentViewMock).toHaveBeenCalledTimes(4);
     expect(setCurrentViewMock).toHaveBeenCalledWith(expect.any(Function));
-  });
+  }); */
 });

@@ -1,5 +1,5 @@
 import { handlerOperator } from "./handlerOperator";
-import { operators } from "@/utils/interface/interfaceTypeOfOperator";
+import { operators } from "@/utils/interface/operator/interfaceTypeOfOperator";
 import { handlerResultOfTheOperation } from "@/methods/result/handlerResultOfTheOperation";
 import {
   setCurrentHistoryMock,
@@ -8,7 +8,7 @@ import {
   setResultOperationMock,
   setSymbolMock,
 } from "../../../__test__/Mock/setMock";
-import { numbers } from "@/utils/interface/interfaceTypeOfNumbers";
+import { numbers } from "@/utils/interface/number/interfaceTypeOfNumbers";
 
 describe("handlerFraction", () => {
   const undefinedProperty: undefined = undefined;

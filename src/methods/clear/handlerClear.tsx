@@ -1,4 +1,4 @@
-import { TypeOfOperator } from '@/utils/interface/interfaceTypeOfOperator';
+import { TypeOfOperator } from '@/utils/interface/operator/interfaceTypeOfOperator';
 import { Dispatch, SetStateAction } from 'react';
 
 interface HandlerClearProps {

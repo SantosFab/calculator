@@ -1,21 +1,22 @@
+import { TypeOfNumbers } from "@/utils/interface/number/interfaceTypeOfNumbers";
 import { Dispatch, SetStateAction } from "react";
 
 interface HandlerNumberOnCurrentViewProps {
   setCurrentView: Dispatch<SetStateAction<string>>;
-  numberS: string;
+  typeOfNumber: TypeOfNumbers;
 }
 
 export function handlerNumberOnCurrentView({
   setCurrentView,
-  numberS,
+  typeOfNumber,
 }: HandlerNumberOnCurrentViewProps): void {
   setCurrentView((current) => {
-    if (current.length >= 10 || numberS.length >= 10) {
+    if (current.length >= 10) {
       return current;
     } else if (current === "0") {
-      return numberS;
+      return typeOfNumber.number;
     } else {
-      return current + numberS;
+      return current + typeOfNumber.number;
     }
   });
 }
