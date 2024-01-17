@@ -1,9 +1,17 @@
 import { handlerNumberOnCurrentView } from "@/methods/add/handlerNumberOnCurrentiView";
 import { setCurrentViewMock } from "../../../__test__/Mock/setMock";
-import { numbers } from "@/utils/interface/number/interfaceTypeOfNumbers";
+import {
+  TypeOfNumbers,
+  numbers,
+} from "@/utils/interface/number/interfaceTypeOfNumbers";
 
 describe("handlerNumberOnCurrentView", () => {
-  const createMockData = (overrides = {}) => ({
+  type MockDataOverries = {
+    setCurrentView?: jest.Mock;
+    typeOfNumber?: TypeOfNumbers;
+  };
+
+  const createMockData = (overrides:MockDataOverries = {}) => ({
     setCurrentView: setCurrentViewMock,
     typeOfNumber: zero,
     ...overrides,

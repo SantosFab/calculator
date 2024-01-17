@@ -1,12 +1,13 @@
 import { handlerDeleteNumber } from "@/methods/delete/handlerDeleteNumber";
 import { setCurrentViewMock } from "../../../__test__/Mock/setMock";
-import { mock } from "node:test";
 
 describe("handlerDeleteNumber", () => {
+  const createMockData = () => ({
+    setCurrentView: setCurrentViewMock,
+  });
+
   it("Deletar o último caractere da string se a string tiver mais de um caractere", () => {
-    const mockData = {
-      setCurrentView: setCurrentViewMock,
-    };
+    const mockData = createMockData();
 
     handlerDeleteNumber(mockData);
 

@@ -7,7 +7,10 @@ import {
   setSymbolMock,
 } from "../../../__test__/Mock/setMock";
 import { numbers } from "@/utils/interface/number/interfaceTypeOfNumbers";
-import { operators } from "@/utils/interface/operator/interfaceTypeOfOperator";
+import {
+  TypeOfOperator,
+  operators,
+} from "@/utils/interface/operator/interfaceTypeOfOperator";
 
 describe("handlerResultOfTheOperation", () => {
   const undefinedProperty: undefined = undefined;
@@ -16,7 +19,7 @@ describe("handlerResultOfTheOperation", () => {
 
   const { add, subtract, divide, multiply } = operators;
 
-  const { zero, one, two } = numbers;
+  const { zero, one, two, three } = numbers;
 
   enum Number {
     Zero = 0 as number,
@@ -24,10 +27,27 @@ describe("handlerResultOfTheOperation", () => {
     Two = 2 as number,
     Three = 3 as number,
     Six = 6 as number,
-    Nine = 9 as number
+    Nine = 9 as number,
   }
 
-  const createMockData = (overrides = {}) => ({
+  type MockFunction = jest.Mock;
+
+  interface MockDataOverrides {
+    setCurrentHistory?: MockFunction;
+    setCurrentView?: MockFunction;
+    setFirstTerm?: MockFunction;
+    setSymbol?: MockFunction;
+    setResultOperation?: MockFunction;
+    currentHistory?: string | undefined;
+    currentView?: string;
+    firstTerm?: number | undefined;
+    symbol?: TypeOfOperator | undefined;
+    resultOperation?: number | undefined;
+    operation?: TypeOfOperator;
+    isEqualButton?: boolean;
+  }
+
+  const createMockData = (overrides: MockDataOverrides = {}) => ({
     setCurrentHistory: setCurrentHistoryMock,
     setCurrentView: setCurrentViewMock,
     setFirstTerm: setFirstTermMock,
@@ -75,7 +95,7 @@ describe("handlerResultOfTheOperation", () => {
     expect(setSymbolMock).not.toHaveBeenCalled();
   });
 
-   it("Primeiro calculo efetuado, com currentView indefinido(valor igual zero)", () => {
+  it("Primeiro calculo efetuado, com currentView indefinido(valor igual zero)", () => {
     const mockData = createMockData({
       currentHistory: `${Number.Three}${subtract.operator}`,
       currentView: zero.number,
@@ -93,7 +113,7 @@ describe("handlerResultOfTheOperation", () => {
     expect(setCurrentViewMock).toHaveBeenCalledWith(zero.number);
     expect(setFirstTermMock).not.toHaveBeenCalled();
     expect(setSymbolMock).not.toHaveBeenCalled();
-  }); 
+  });
 
   it("Efetuação de cálculo sequências sem uso do operador de igualdade '=' - ResultOfOperation indefinido ", () => {
     const mockData = createMockData({
@@ -118,7 +138,7 @@ describe("handlerResultOfTheOperation", () => {
   it("Efetuação de cálculo sequências sem uso do operador de igualdade '='ResultOfOperation definido ", () => {
     const mockData = createMockData({
       currentHistory: `${Number.Three}${divide.operator}`,
-      currentView: Number.Three,
+      currentView: three.number,
       firstTerm: Number.Three,
       symbol: divide,
       operation: divide,

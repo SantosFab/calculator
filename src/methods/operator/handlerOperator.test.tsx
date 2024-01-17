@@ -1,5 +1,8 @@
 import { handlerOperator } from "./handlerOperator";
-import { operators } from "@/utils/interface/operator/interfaceTypeOfOperator";
+import {
+  TypeOfOperator,
+  operators,
+} from "@/utils/interface/operator/interfaceTypeOfOperator";
 import { handlerResultOfTheOperation } from "@/methods/result/handlerResultOfTheOperation";
 import {
   setCurrentHistoryMock,
@@ -25,7 +28,24 @@ describe("handlerOperatior", () => {
   const displayTwoNegative: string = `${two.number}${subtract.operator}`;
   const displayThreeNegative: string = `${three.number}${subtract.operator}`;
 
-  const createMockData = (overrides = {}) => ({
+  type MockFunction = jest.Mock;
+
+  interface MockDataOverrides {
+    setCurrentHistory?: MockFunction;
+    setCurrentView?: MockFunction;
+    setFirstTerm?: MockFunction;
+    setSymbol?: MockFunction;
+    setResultOperation?: MockFunction;
+    currentHistory?: string | undefined;
+    currentView?: string;
+    firstTerm?: number | undefined;
+    symbol?: TypeOfOperator | undefined;
+    operation?: TypeOfOperator;
+    resultOperation?: number | undefined;
+    handlerResultOfTheOperation?: Function;
+  }
+
+  const createMockData = (overrides: MockDataOverrides = {}) => ({
     setCurrentHistory: setCurrentHistoryMock,
     setCurrentView: setCurrentViewMock,
     setSymbol: setSymbolMock,

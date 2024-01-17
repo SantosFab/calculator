@@ -8,14 +8,16 @@ import {
 } from "../../../__test__/Mock/setMock";
 
 describe("handlerClear", () => {
+  const createMockData = () => ({
+    setCurrentHistory: setCurrentHistoryMock,
+    setCurrentView: setCurrentViewMock,
+    setFirstTerm: setFirstTermMock,
+    setResultOperation: setResultOperationMock,
+    setSymbol: setSymbolMock,
+  });
+
   it("Resetar todos os estados", () => {
-    const mockData = {
-      setCurrentHistory: setCurrentHistoryMock,
-      setCurrentView: setCurrentViewMock,
-      setFirstTerm: setFirstTermMock,
-      setResultOperation: setResultOperationMock,
-      setSymbol: setSymbolMock,
-    };
+    const mockData = createMockData();
 
     handlerClear(mockData);
 

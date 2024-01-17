@@ -2,10 +2,15 @@ import { handlerFraction } from "@/methods/fraction/handlerFraction";
 import { setCurrentViewMock } from "../../../__test__/Mock/setMock";
 
 describe("handlerFraction", () => {
-  const createMockData = (overrides = {}) => ({
+  interface MockDataOverrides {
+    currentView?: string;
+    setCurrentView?: jest.Mock;
+  }
+
+  const createMockData = (overrides: MockDataOverrides = {}) => ({
     currentView: "0",
     setCurrentView: setCurrentViewMock,
-    ...overrides
+    ...overrides,
   });
 
   it("Não deverá adicionar um ponto se já houver ponto na string", () => {
